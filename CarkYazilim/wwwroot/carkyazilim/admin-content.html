@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İçerik Yönetimi - Çark Yazılım</title>
+    
+    <!-- External Stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color, #00ffff);
+            font-size: 24px;
+        }
+        
+        .admin-header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color, #00ffff), var(--secondary-color, #ff0080));
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-success {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        
+        .btn-success:hover {
+            background: rgba(0, 255, 0, 0.3);
+        }
+        
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        .content-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary-color, #00ffff);
+            border-bottom-color: var(--primary-color, #00ffff);
+        }
+        
+        .tab-btn:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .content-form {
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color, #00ffff);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .item-list {
+            background: rgba(20, 20, 30, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .item-card {
+            background: rgba(10, 10, 20, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .item-card:hover {
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+        
+        .item-info h4 {
+            color: var(--primary-color, #00ffff);
+            margin-bottom: 5px;
+        }
+        
+        .item-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+        
+        .btn-danger {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+        
+        .btn-danger:hover {
+            background: rgba(255, 68, 68, 0.3);
+        }
+        
+        .add-item-btn {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            color: var(--primary-color, #00ffff);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .add-item-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+        
+        .success-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            color: #00ff00;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-color, #00ffff);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #fff;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .form-group.input,
+        .form-group.textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-group.textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+                padding: 15px 20px;
+            }
+
+            .admin-header h1 {
+                font-size: 18px;
+            }
+
+            .admin-header-actions {
+                flex-wrap: wrap;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .admin-header-actions .btn {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 120px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .admin-header-actions .btn i {
+                font-size: 12px;
+            }
+            
+            .admin-container {
+                padding: 15px;
+            }
+
+            .content-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-btn {
+                white-space: nowrap;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .content-form {
+                padding: 20px;
+            }
+
+            .item-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .item-actions {
+                width: 100%;
+            }
+
+            .item-actions .btn {
+                flex: 1;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header-actions .btn {
+                flex: 1 1 100%;
+                font-size: 11px;
+            }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .content-form {
+                padding: 15px;
+            }
+
+            .item-card {
+                padding: 15px;
+            }
+
+            .modal-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1><i class="fas fa-edit"></i> İçerik Yönetimi</h1>
+        <div class="admin-header-actions">
+            <a href="index.html" class="btn btn-primary" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Siteye Git
+            </a>
+            <a href="admin-panel.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Panele Dön
+            </a>
+            <a href="admin-login.html" class="btn btn-secondary" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Çıkış
+            </a>
+        </div>
+    </div>
+    
+    <div class="admin-container">
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> Değişiklikler başarıyla kaydedildi!
+        </div>
+        
+        <div class="content-tabs">
+            <button class="tab-btn active" data-tab="header">Header</button>
+            <button class="tab-btn" data-tab="teklif">Teklif Formu</button>
+            <button class="tab-btn" data-tab="services">Services</button>
+            <button class="tab-btn" data-tab="portfolio">Portfolio</button>
+            <button class="tab-btn" data-tab="team">Team Members</button>
+        </div>
+        
+        <!-- Header Tab -->
+        <div class="tab-content active" id="header-tab">
+            <div class="content-form">
+                <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">Header Yönetimi</h2>
+                <div class="form-group">
+                    <label for="headerTitle">Title</label>
+                    <input type="text" id="headerTitle" placeholder="Header Title">
+                </div>
+                <div class="form-group">
+                    <label for="headerDescription">Description</label>
+                    <textarea id="headerDescription" placeholder="Header Description"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Teklif Form Tab -->
+        <div class="tab-content" id="teklif-tab">
+            <div class="content-form">
+                <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">Teklif Formu Ayarları</h2>
+                <div class="form-group">
+                    <label for="teklifButtonText">Buton Metni</label>
+                    <input type="text" id="teklifButtonText" placeholder="Teklif Al">
+                </div>
+                <div class="form-group">
+                    <label for="teklifModalTitle">Modal Başlığı</label>
+                    <input type="text" id="teklifModalTitle" placeholder="Teklif Formu">
+                </div>
+                <div class="form-group">
+                    <label for="teklifSubmitButtonText">Gönder Butonu Metni</label>
+                    <input type="text" id="teklifSubmitButtonText" placeholder="Teklif Gönder">
+                </div>
+                <div class="form-group">
+                    <label for="teklifMessagePlaceholder">Mesaj Placeholder</label>
+                    <input type="text" id="teklifMessagePlaceholder" placeholder="Projeniz hakkında detaylı bilgi verin...">
+                </div>
+                <div class="form-group">
+                    <label for="teklifMessageMaxLength">Mesaj Maksimum Karakter</label>
+                    <input type="number" id="teklifMessageMaxLength" placeholder="2000" min="100" max="5000">
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="teklifIsActive">
+                    <label for="teklifIsActive">Form Aktif</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services Tab -->
+        <div class="tab-content" id="services-tab">
+            <div class="content-form">
+                <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">Services Yönetimi</h2>
+                <div id="servicesList"></div>
+                <button class="add-item-btn" onclick="addService()">
+                    <i class="fas fa-plus"></i> Yeni Service Ekle
+                </button>
+            </div>
+        </div>
+        
+        <!-- Portfolio Tab -->
+        <div class="tab-content" id="portfolio-tab">
+            <div class="content-form">
+                <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">Portfolio Yönetimi</h2>
+                <div id="portfolioList"></div>
+                <button class="add-item-btn" onclick="addPortfolio()">
+                    <i class="fas fa-plus"></i> Yeni Portfolio Ekle
+                </button>
+            </div>
+        </div>
+        
+        <!-- Team Tab -->
+        <div class="tab-content" id="team-tab">
+            <div class="content-form">
+                <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">Team Members Yönetimi</h2>
+                <div id="teamList"></div>
+                <button class="add-item-btn" onclick="addTeamMember()">
+                    <i class="fas fa-plus"></i> Yeni Team Member Ekle
+                </button>
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button class="btn btn-success" onclick="saveAllContent()">
+                <i class="fas fa-save"></i> Tüm Değişiklikleri Kaydet
+            </button>
+            <button class="btn btn-secondary" onclick="loadAllContent()">
+                <i class="fas fa-undo"></i> Değişiklikleri Geri Al
+            </button>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 id="modalTitle">Düzenle</h2>
+                <button class="modal-close" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalBody"></div>
+            <div class="form-actions" style="margin-top: 20px;">
+                <button class="btn btn-success" onclick="saveModalContent()">
+                    <i class="fas fa-save"></i> Kaydet
+                </button>
+                <button class="btn btn-secondary" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i> İptal
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/admin.js"></script>
+    <script src="js/content-manager.js"></script>
+</body>
+</html>
+
