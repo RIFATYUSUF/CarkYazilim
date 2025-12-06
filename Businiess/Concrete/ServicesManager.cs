@@ -3,6 +3,9 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Businiess.Concrete
 {
@@ -15,47 +18,29 @@ namespace Businiess.Concrete
             _servicesDal = servicesDal;
         }
 
-        public List<Services> GetAllServices()
+        public List<Services> GetAll()
         {
             return _servicesDal.GetAll();
         }
 
-        public void ServicesAdd(Services services)
+        public Services GetById(int id)
         {
-            ValidateService(services);
+            return _servicesDal.GetById(id);
+        }
+
+        public void Add(Services services)
+        {
             _servicesDal.Add(services);
         }
 
-        public void ServicesDelete(Services services)
+        public void Update(Services services)
         {
-            if (services.ServicesId <= 0)
-                throw new Exception("Geçersiz ID!");
-
-            _servicesDal.Delete(services);
-        }
-
-        public void ServicesUpdate(Services services)
-        {
-            if (services.ServicesId <= 0)
-                throw new Exception("Geçersiz ID!");
-
-            ValidateService(services);
             _servicesDal.Update(services);
         }
 
-        private void ValidateService(Services services)
+        public void Delete(Services services)
         {
-            if (string.IsNullOrWhiteSpace(services.ServiceTitle))
-                throw new Exception("Servis başlığı boş olamaz!");
-
-            if (services.ServiceTitle.Length > 150)
-                throw new Exception("Servis başlığı 150 karakterden uzun olamaz!");
-
-            if (string.IsNullOrWhiteSpace(services.ServiceDescription))
-                throw new Exception("Servis açıklaması boş olamaz!");
-
-            if (!string.IsNullOrWhiteSpace(services.Icon) && services.Icon.Length > 200)
-                throw new Exception("Icon alanı çok uzun!");
+            _servicesDal.Delete(services);
         }
     }
 }

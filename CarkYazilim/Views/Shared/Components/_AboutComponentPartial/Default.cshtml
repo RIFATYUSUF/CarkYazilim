@@ -1,16 +1,22 @@
-﻿<section class="hero" id="ana-sayfa">
+﻿@using Entities.Concrete
+@model List<Header>
+<section class="hero" id="ana-sayfa">
     <div class="floating-elements">
         <div class="floating-element" aria-hidden="true"></div>
         <div class="floating-element" aria-hidden="true"></div>
         <div class="floating-element" aria-hidden="true"></div>
         <div class="floating-element" aria-hidden="true"></div>
     </div>
-    <div class="hero-content">
-        <h1>Geleceği Kodluyoruz</h1>
-        <p class="subtitle">Oyundan siber güvenliğe, mobil uygulamalardan web çözümlerine kadar teknolojinin her alanında yenilikçi çözümler sunuyoruz.</p>
-        <div class="hero-buttons">
-            <a href="#hizmetler" class="btn-primary" aria-label="Hizmetleri keşfet">Hizmetleri Keşfet</a>
-            <a href="#portfoy" class="btn-secondary" aria-label="Projelerimizi gör">Projelerimizi Gör</a>
+    @foreach (var item in Model)
+    {
+        <div class="hero-content">
+            <h1>Geleceği Kodluyoruz</h1>
+            <p class="subtitle">@item.Description</p>
+            <div class="hero-buttons">
+                <a href="#hizmetler" class="btn-primary" aria-label="Hizmetleri keşfet">Hizmetleri Keşfet</a>
+                <a href="#portfoy" class="btn-secondary" aria-label="Projelerimizi gör">Projelerimizi Gör</a>
+            </div>
         </div>
-    </div>
+    }
+   
 </section>

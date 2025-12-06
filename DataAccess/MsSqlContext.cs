@@ -22,5 +22,6 @@ namespace DataAccess
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Hizmetler> Hizmetlers { get; set; }
     }
 }

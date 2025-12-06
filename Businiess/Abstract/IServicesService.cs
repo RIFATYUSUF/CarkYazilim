@@ -9,9 +9,10 @@ namespace Businiess.Abstract
 {
     public interface IServicesService
     {
-        void ServicesAdd(Services services);
-        void ServicesUpdate(Services services);
-        void ServicesDelete(Services services);
-        List<Services> GetAllServices();
+        List<Services> GetAll();
+        Services GetById(int id);
+        void Add(Services services);
+        void Update(Services services);
+        void Delete(Services services);
     }
 }

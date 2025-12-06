@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Services : IEntity
+    public class Hizmetler : IEntity
     {
-        public int ServicesId { get; set; }
-        public string ServiceTitle { get; set; } = string.Empty;
-        public string ServiceDescription { get; set; } = string.Empty;
+        public int HizmetlerId { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
         public string Icon { get; set; } = string.Empty;
         public string Link { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;

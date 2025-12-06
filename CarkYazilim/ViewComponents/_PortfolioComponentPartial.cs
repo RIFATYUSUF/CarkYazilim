@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Businiess.Abstract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.ViewComponents
 {
     public class _PortfolioComponentPartial : ViewComponent
     {
+        IPortfolioService _portfolioService;
+
+        public _PortfolioComponentPartial(IPortfolioService portfolioService)
+        {
+            _portfolioService = portfolioService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            return View();
+            var values = _portfolioService.GetAllPortfolios();
+            return View(values);
         }
     }
 }

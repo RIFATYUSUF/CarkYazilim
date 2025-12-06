@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete
 {
-    public class ServiceDal : GenericRepository<MsSqlContext, Services>, IServicesDal
+    public class HizmetlerDal : GenericRepository<MsSqlContext,Hizmetler>, IHizmetlerDal
     {
     }
 }

@@ -16,11 +16,11 @@ namespace DataAccess.Repository
     {
         public void Add(TEntity entity)
         {
-            using (TContext c = new TContext())
-            {
-                c.Add(entity);
-                c.SaveChanges();
-            }
+
+            using var c = new TContext();
+            c.Add(entity);
+            c.SaveChanges();
+
         }
 
         public void Delete(TEntity entity)

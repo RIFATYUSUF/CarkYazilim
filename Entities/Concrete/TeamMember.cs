@@ -14,6 +14,7 @@ namespace Entities.Concrete
         public string Surname { get; set; }
         public string Role { get; set; }
         public string Initials { get; set; } // Örn: "OG"
+        public string Description { get; set; }
         public string LinkedInUrl { get; set; }
         public string TwitterUrl { get; set; }
         public string GitHubUrl { get; set; }

@@ -1,50 +1,22 @@
-﻿<section class="portfolio scroll-animation" id="portfoy">
+﻿@using Entities.Concrete
+@model List<Portfolio>
+<section class="portfolio scroll-animation" id="portfoy">
     <div class="section-title">
         <h2>Portföyümüz</h2>
         <p>Başarıyla tamamladığımız projeler ve müşterilerimizin hikayelerini keşfedin. Her proje bizim için bir başarı hikayesidir.</p>
     </div>
     <div class="portfolio-grid">
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CyberRace 2077 - Futuristik yarış oyunu projesi" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Mobil Oyun</h3>
-                <p>Futuristik yarış oyunu - Unity ile geliştirildi, 1M+ indirme</p>
-            </div>
-        </article>
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="FinTech Dashboard - Finansal analiz platformu" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Web Sitesi</h3>
-                <p>Web sitesi - React & Node.js, 50K+ aktif kullanıcı</p>
-            </div>
-        </article>
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="HealthTracker Pro - Sağlık takip uygulaması" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Mobil Uygulama</h3>
-                <p>Sağlık takip uygulaması - Flutter, IoT entegrasyonu</p>
-            </div>
-        </article>
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="SecureNet Enterprise - Kurumsal güvenlik çözümü" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Otomasyon Projesi</h3>
-                <p>Kurumsal güvenlik çözümü - AI destekli tehdit analizi</p>
-            </div>
-        </article>
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart Analytics AI - Büyük veri analizi platformu" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Smart Analytics AI</h3>
-                <p>Büyük veri analizi platformu - Machine Learning, Python</p>
-            </div>
-        </article>
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Virtual Office Space - VR iş birliği platformu" class="portfolio-image" loading="lazy">
-            <div class="portfolio-overlay">
-                <h3>Sosyal Medya Yönetimi</h3>
-                <p>Sosyal medya hesaplarınızı yönetiyoruz ve içeriklerinizi planlıyoruz.</p>
-            </div>
-        </article>
+        @foreach (var item in Model)
+        {
+            <article class="portfolio-item">
+                <img src="@item.ImageUrl1" alt="CyberRace 2077 - Futuristik yarış oyunu projesi" class="portfolio-image" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>@item.Title</h3>
+                    <p>@item.Description</p>
+                </div>
+            </article>
+        }
+        
+
     </div>
 </section>
