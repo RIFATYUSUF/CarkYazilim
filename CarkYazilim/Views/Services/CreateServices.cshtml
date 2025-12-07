@@ -1,0 +1,51 @@
+﻿@using Entities.Concrete
+@model Hizmetler
+
+@{
+    ViewData["Title"] = "Yeni Hizmet Ekle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+    <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">
+        Yeni Hizmet Ekle
+    </h2>
+
+    <form method="post">
+
+        <div class="form-group">
+            <label>Başlık (Title)</label>
+            <input type="text" name="Title" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama (Description)</label>
+            <textarea name="Description" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Icon (Font Awesome Sınıfı)</label>
+            <input type="text" name="Icon" class="form-control" placeholder="fa-solid fa-code" />
+        </div>
+
+        <div class="form-group">
+            <label>Link (Detay Sayfası URL)</label>
+            <input type="text" name="Link" class="form-control" placeholder="#" required />
+        </div>
+
+
+        <div class="form-group">
+            <label>Aktif Mi?</label>
+            <input type="checkbox" name="IsActive" value="true" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Kaydet
+        </button>
+
+        <a href="/Hizmetler/Index" class="btn btn-secondary">
+            Geri Dön
+        </a>
+
+    </form>
+</div>

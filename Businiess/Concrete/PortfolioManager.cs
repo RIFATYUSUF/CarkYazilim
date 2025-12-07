@@ -20,6 +20,11 @@ namespace Businiess.Concrete
             return _portfolioDal.GetAll();
         }
 
+        public Portfolio GetById(int id)
+        {
+            return _portfolioDal.GetById(id);
+        }
+
         public void PortfolioAdd(Portfolio portfolio)
         {
             ValidatePortfolio(portfolio);

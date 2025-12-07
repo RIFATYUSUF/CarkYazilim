@@ -13,5 +13,6 @@ namespace Businiess.Abstract
         void PortfolioUpdate(Portfolio portfolio);
         void PortfolioDelete(Portfolio portfolio);
         List<Portfolio> GetAllPortfolios();
+        Portfolio GetById(int id);
     }
 }

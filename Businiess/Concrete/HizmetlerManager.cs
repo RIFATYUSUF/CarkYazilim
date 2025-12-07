@@ -20,12 +20,12 @@ namespace Businiess.Concrete
 
         public void Add(Hizmetler hizmetler)
         {
-            throw new NotImplementedException();
+            _hizmetlerDal.Add(hizmetler);
         }
 
         public void Delete(Hizmetler hizmetler)
         {
-            throw new NotImplementedException();
+            _hizmetlerDal.Delete(hizmetler);
         }
 
         public List<Hizmetler> GetAll()
@@ -35,12 +35,12 @@ namespace Businiess.Concrete
 
         public Hizmetler GetById(int id)
         {
-            throw new NotImplementedException();
+            return _hizmetlerDal.GetById(id);
         }
 
         public void Update(Hizmetler hizmetler)
         {
-            throw new NotImplementedException();
+            _hizmetlerDal.Update(hizmetler);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Entities.Concrete
         public string ServiceTitle { get; set; } = string.Empty;
         public string ServiceDescription { get; set; } = string.Empty;
         public string Icon { get; set; } = string.Empty;
-        public string Link { get; set; } = string.Empty;
+        public string Link { get; set; } = "#";
         public bool IsActive { get; set; } = true;
     }
 }

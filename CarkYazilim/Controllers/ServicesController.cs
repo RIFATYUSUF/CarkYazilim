@@ -1,4 +1,5 @@
 ﻿using Businiess.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
@@ -16,6 +17,23 @@ namespace CarkYazilim.Controllers
         {
             var value = _hizmetlerService.GetAll();
             return View(value);
+        }
+        public IActionResult DeleteService(int id)
+        {
+            var value = _hizmetlerService.GetById(id);
+            _hizmetlerService.Delete(value);
+            return RedirectToAction("ServicesList");
+        }
+        [HttpGet]
+        public IActionResult CreateServices()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateServices(Hizmetler hizmetler)
+        {
+            _hizmetlerService.Add(hizmetler);
+            return RedirectToAction("ServicesList");
         }
     }
 }
