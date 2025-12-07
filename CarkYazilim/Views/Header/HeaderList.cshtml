@@ -1,0 +1,25 @@
+﻿@using Entities.Concrete
+@model List<Header>
+
+@{
+    ViewData["Title"] = "HeaderList";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+    <h2 style="color: var(--primary-color); margin-bottom:20px;">Header Yönetimi</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="item-card">
+            <div class="item-info">
+                <h4>@item.Title</h4>
+                <p>@item.Description</p>
+            </div>
+
+            <div class="item-actions">
+                <a href="/Header/UpdateHeader/@item.HeaderId" class="btn btn-primary btn-small">Düzenle</a>
+            </div>
+        </div>
+    }
+</div>

@@ -12,6 +12,7 @@ namespace Businiess.Abstract
         void HeaderAdd(Header header);
         void HeaderUpdate(Header header);
         void HeaderDelete(Header header);
+        Header GetHeaderById(int id);
         List<Header> GetAllHeaders();
 
     }

@@ -47,5 +47,29 @@ namespace CarkYazilim.Controllers
             return RedirectToAction("TeamMemberList");
         }
 
+        [HttpGet]
+        public IActionResult UpdateTeamMember(int id)
+        {
+            var teamMember = _teamMemberService.GetAllTeamMembers().FirstOrDefault(tm => tm.TeamMemberId == id);
+            if (teamMember != null)
+            {
+                return View(teamMember);
+            }
+            return RedirectToAction("TeamMemberList");
+        }
+        [HttpPost]
+        public IActionResult UpdateTeamMember(TeamMember teamMember)
+        {
+            try
+            {
+                _teamMemberService.TeamMemberUpdate(teamMember);
+                return RedirectToAction("TeamMemberList");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View(teamMember); // Form tekrar açılır, girilen bilgiler korunur
+            }
+        }
     }
 }

@@ -1,0 +1,79 @@
+﻿@using Entities.Concrete
+@model TeamMember
+
+@{
+    ViewData["Title"] = "UpdateTeamMember";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+    <h2 style="color:var(--primary-color); margin-bottom:20px;">Team Member Düzenle</h2>
+
+    <!-- Hata mesajı -->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    <<form method="post" action="@Url.Action("UpdateTeamMember", "TeamMemberController1")">
+
+        <input type="hidden" name="TeamMemberId" value="@Model.TeamMemberId" />
+
+        <div class="form-group">
+            <label>Ad</label>
+            <input type="text" name="Name" class="form-control" value="@Model.Name" required />
+        </div>
+
+        <div class="form-group">
+            <label>Soyad</label>
+            <input type="text" name="Surname" class="form-control" value="@Model.Surname" />
+        </div>
+
+        <div class="form-group">
+            <label>Görev / Pozisyon</label>
+            <input type="text" name="Role" class="form-control" value="@Model.Role" required />
+        </div>
+
+        <div class="form-group">
+            <label>Kısaltma (Initials)</label>
+            <input type="text" name="Initials" class="form-control" value="@Model.Initials" />
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama</label>
+            <textarea name="Description" class="form-control">@Model.Description</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>LinkedIn URL</label>
+            <input type="text" name="LinkedInUrl" class="form-control" value="@Model.LinkedInUrl" />
+        </div>
+
+        <div class="form-group">
+            <label>Twitter URL</label>
+            <input type="text" name="TwitterUrl" class="form-control" value="@Model.TwitterUrl" />
+        </div>
+
+        <div class="form-group">
+            <label>GitHub URL</label>
+            <input type="text" name="GitHubUrl" class="form-control" value="@Model.GitHubUrl" />
+        </div>
+
+        <div class="form-group">
+            <label>Aktif Mi?</label>
+            <select name="IsActive" class="form-control">
+                <option value="true" @@(Model.IsActive ? "selected=\"selected\"" : "")>Evet</option>
+                <option value="false" @@(!Model.IsActive ? "selected=\"selected\"" : "")>Hayır</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" type="submit">
+            <i class="fas fa-save"></i> Kaydet
+        </button>
+
+        <a href="/TeamMember1/TeamMemberList" class="btn btn-secondary">
+            Geri Dön
+        </a>
+
+    </form>
+</div>

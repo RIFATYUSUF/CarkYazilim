@@ -23,6 +23,11 @@ namespace Businiess.Concrete
             return _headerDal.GetAll();
         }
 
+        public Header GetHeaderById(int id)
+        {
+           return _headerDal.GetById(id);
+        }
+
         public void HeaderAdd(Header header)
         {
             // Basit validation
