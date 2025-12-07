@@ -58,9 +58,7 @@ namespace Businiess.Concrete
                 throw new Exception("Pozisyon 100 karakterden uzun olamaz!");
 
             // Örneğin sosyal medya linki varsa minimum mantık kontrolü
-            if (!string.IsNullOrWhiteSpace(teamMember.TwitterUrl) &&
-                !teamMember.TwitterUrl.StartsWith("https://"))
-                throw new Exception("Instagram URL geçerli formatta olmalıdır!");
+            
         }
     }
 }

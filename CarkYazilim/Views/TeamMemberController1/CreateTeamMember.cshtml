@@ -1,0 +1,69 @@
+﻿@using Entities.Concrete
+@model TeamMember
+@{
+    ViewData["Title"] = "Yeni Team Member Ekle";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+    <h2 style="color: var(--primary-color, #00ffff); margin-bottom: 20px;">
+        Yeni Team Member Ekle
+    </h2>
+
+    <form method="post">
+
+        <div class="form-group">
+            <label>Ad</label>
+            <input type="text" name="Name" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Soyad</label>
+            <input type="text" name="Surname" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Rol</label>
+            <input type="text" name="Role" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>Baş Harfler (Örn: OG)</label>
+            <input type="text" name="Initials" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama</label>
+            <textarea name="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>LinkedIn URL</label>
+            <input type="text" name="LinkedInUrl" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Twitter URL</label>
+            <input type="text" name="TwitterUrl" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>GitHub URL</label>
+            <input type="text" name="GitHubUrl" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Aktif Mi?</label>
+            <input type="checkbox" name="IsActive" value="true" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Kaydet
+        </button>
+
+        <a href="/TeamMemberController1/TeamMemberList" class="btn btn-secondary">
+            Geri Dön
+        </a>
+
+    </form>
+</div>

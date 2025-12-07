@@ -1,29 +1,145 @@
 ﻿@using Entities.Concrete
 @model List<Hizmetler>
 
-<section class="services" id="hizmetler">
-    <div class="section-title">
+<style>
+    .hizmetler-section {
+        padding: 100px 20px;
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .hizmetler-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+        .hizmetler-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff88;
+        }
+
+        .hizmetler-header p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+    .hizmetler-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+    }
+
+    /* 🔥 KOMPakt + Neon Glow Kart */
+    .hizmet-kutu {
+        background: rgba(10, 20, 25, 0.7);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        padding: 22px; /* Daha kompakt */
+        border-radius: 16px;
+        text-align: center;
+        transition: 0.35s ease;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(6px);
+        min-height: 230px; /* Yükseklik azaldı */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: 0 0 15px #00ffff11;
+    }
+
+        /* Hover Glow Efekti (GENİŞLEME, PARLAMA) */
+        .hizmet-kutu:hover {
+            transform: translateY(-9px);
+            border-color: #00ffff;
+            box-shadow: 0 0 30px #00ffffffaa, 0 0 70px #00ffff55;
+        }
+
+        /* Üstten kayan ışık efekti (kalsın dediğin efekt) */
+        .hizmet-kutu::before {
+            content: "";
+            position: absolute;
+            top: -110%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(0, 255, 255, 0.18));
+            transition: 0.45s ease;
+        }
+
+        .hizmet-kutu:hover::before {
+            top: 0;
+        }
+
+    /* İkon – kompakt ama neon */
+    .hizmet-ikon {
+        font-size: 34px; /* Küçültüldü */
+        margin-bottom: 12px;
+        color: #00ffff;
+        text-shadow: 0 0 12px #00ffffaa;
+    }
+
+    /* Başlık */
+    .hizmet-icerik h3 {
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #ffffff;
+    }
+
+    /* Açıklama */
+    .hizmet-icerik p {
+        font-size: 0.95rem;
+        opacity: 0.85;
+        margin-bottom: 15px;
+        line-height: 1.45;
+    }
+
+    /* Buton */
+    .hizmet-btn {
+        margin-top: auto;
+        color: #00ffff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: 0.3s ease;
+        display: inline-block;
+    }
+
+        .hizmet-btn:hover {
+            transform: translateX(6px);
+            text-shadow: 0 0 10px #00ffffcc;
+        }
+</style>
+
+
+
+
+
+<section class="hizmetler-section">
+    <div class="hizmetler-header">
         <h2>Hizmetlerimiz</h2>
-        <p>Teknolojinin gücünü kullanarak işletmenizi geleceğe taşıyoruz. Her projeye özel çözümler ve yenilikçi yaklaşımlarla fark yaratıyoruz.</p>
+        <p>İşletmenizi ileri taşıyacak profesyonel hizmetler sunuyoruz.</p>
     </div>
 
-    <div class="services-grid">
+    <div class="hizmetler-container">
         @foreach (var item in Model)
         {
-            <article class="service-card">
-                <div class="service-icon" aria-hidden="true">
+            <div class="hizmet-kutu">
+                <div class="hizmet-ikon">
                     <i class="@item.Icon"></i>
                 </div>
 
-                <h3>@item.Title</h3>
-                <p>@item.Description</p>
+                <div class="hizmet-icerik">
+                    <h3>@item.Title</h3>
+                    <p>@item.Description</p>
 
-                <a href="@item.Link"
-                   class="learn-more"
-                   aria-label="@item.Title hizmeti detayları">
-                    Detaylar <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </article>
+                    <a href="@item.Link" class="hizmet-btn">
+                        İncele <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         }
     </div>
 </section>

@@ -1,0 +1,31 @@
+﻿@using Entities.Concrete
+@model List<Hizmetler>
+
+@{
+    ViewData["Title"] = "ServicesList";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+
+    @foreach (var item in Model)
+    {
+        <div class="item-card">
+            <div class="item-info">
+                <h4>@item.Title</h4>
+                <p>@item.Description</p>
+                <small style="opacity: 0.7;">Icon: @item.Icon – Link: @item.Link</small>
+            </div>
+
+            <div class="item-actions">
+                <a href="/Services/Edit/@item.HizmetlerId" class="btn btn-primary btn-small">Düzenle</a>
+                <a href="/Services/Delete/@item.HizmetlerId" class="btn btn-danger btn-small">Sil</a>
+            </div>
+        </div>
+    }
+
+    <a href="/Services/Add" class="btn btn-success add-item-btn">
+        Yeni Service Ekle
+    </a>
+
+</div>

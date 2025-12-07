@@ -25,8 +25,8 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
 }
-
 /* Animated Background */
+
 .animated-bg {
     position: fixed;
     top: 0;
@@ -73,8 +73,8 @@ body {
         transform: translateY(10px) rotate(240deg);
     }
 }
-
 /* Header */
+
 header {
     position: fixed;
     top: 0;
@@ -186,8 +186,8 @@ nav {
         transform: translateY(-2px);
         box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
     }
-
 /* Hero Section */
+
 .hero {
     height: 100vh;
     display: flex;
@@ -311,8 +311,8 @@ nav {
     color: var(--dark-bg);
     box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3);
 }
-
 /* Floating Elements */
+
 .floating-elements {
     position: absolute;
     width: 100%;
@@ -362,8 +362,8 @@ nav {
         transform: translateY(-20px) rotate(180deg);
     }
 }
-
 /* Services Section */
+
 .services {
     padding: 120px 30px;
     max-width: 1400px;
@@ -477,8 +477,8 @@ nav {
         transform: translateX(5px);
         text-shadow: 0 0 10px var(--primary-color);
     }
-
 /* Portfolio Section */
+
 .portfolio {
     padding: 120px 30px;
     background: linear-gradient(135deg, rgba(0,255,255,0.05), rgba(255,0,128,0.05));
@@ -545,8 +545,8 @@ nav {
     text-align: center;
     max-width: 80%;
 }
-
 /* Team Section */
+
 .team {
     padding: 120px 30px;
     max-width: 1400px;
@@ -631,8 +631,8 @@ nav {
         transform: scale(1.2);
         box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
     }
-
 /* Contact Section */
+
 .contact {
     padding: 120px 30px;
     background: linear-gradient(135deg, rgba(255,0,128,0.1), rgba(0,255,255,0.1));
@@ -712,9 +712,7 @@ nav {
         font-weight: 500;
     }
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group input, .form-group textarea, .form-group select {
         width: 100%;
         padding: 15px;
         background: rgba(0, 0, 0, 0.3);
@@ -726,9 +724,7 @@ nav {
         font-family: 'Inter', sans-serif;
     }
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
@@ -756,8 +752,8 @@ nav {
         transform: translateY(-2px);
         box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
     }
-
 /* Footer */
+
 footer {
     background: var(--dark-bg);
     padding: 60px 30px 30px;
@@ -779,8 +775,7 @@ footer {
     color: var(--primary-color);
 }
 
-.footer-section p,
-.footer-section a {
+.footer-section p, .footer-section a {
     color: var(--text-muted);
     text-decoration: none;
     line-height: 1.6;
@@ -805,8 +800,8 @@ footer {
     border-top: 1px solid rgba(0, 255, 255, 0.1);
     color: var(--text-muted);
 }
-
 /* Responsive Design */
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 3rem;
@@ -830,14 +825,12 @@ footer {
         gap: 40px;
     }
 
-    .services-grid,
-    .portfolio-grid,
-    .team-grid {
+    .services-grid, .portfolio-grid, .team-grid {
         grid-template-columns: 1fr;
     }
 }
-
 /* Scroll Animations */
+
 .scroll-animation {
     opacity: 0;
     transform: translateY(50px);
@@ -848,8 +841,8 @@ footer {
         opacity: 1;
         transform: translateY(0);
     }
-
 /* Particle Effect */
+
 .particles {
     position: fixed;
     top: 0;
@@ -880,8 +873,8 @@ footer {
         opacity: 0;
     }
 }
-
 /* Mobile Menu */
+
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -904,8 +897,8 @@ footer {
     padding: 20px 30px;
     gap: 20px;
 }
-
 /* Modal Styles */
+
 .modal {
     display: none;
     position: fixed;
@@ -1026,11 +1019,7 @@ footer {
     color: var(--secondary-color);
 }
 
-.teklif-form input[type="text"],
-.teklif-form input[type="email"],
-.teklif-form input[type="tel"],
-.teklif-form select,
-.teklif-form textarea {
+.teklif-form input[type="text"], .teklif-form input[type="email"], .teklif-form input[type="tel"], .teklif-form select, .teklif-form textarea {
     width: 100%;
     padding: 12px 15px;
     background: rgba(10, 10, 20, 0.8);
@@ -1042,9 +1031,7 @@ footer {
     transition: all 0.3s ease;
 }
 
-    .teklif-form input:focus,
-    .teklif-form select:focus,
-    .teklif-form textarea:focus {
+    .teklif-form input:focus, .teklif-form select:focus, .teklif-form textarea:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
@@ -1054,8 +1041,8 @@ footer {
     resize: vertical;
     min-height: 120px;
 }
-
 /* File Upload Styles */
+
 .file-upload-wrapper {
     position: relative;
 }
@@ -1163,8 +1150,8 @@ footer {
         cursor: not-allowed;
         transform: none;
     }
-
 /* Error Messages */
+
 .error-message {
     display: block;
     color: var(--secondary-color);
@@ -1177,12 +1164,11 @@ footer {
         display: none;
     }
 
-.teklif-form input:invalid:not(:placeholder-shown),
-.teklif-form textarea:invalid:not(:placeholder-shown) {
+.teklif-form input:invalid:not(:placeholder-shown), .teklif-form textarea:invalid:not(:placeholder-shown) {
     border-color: var(--secondary-color);
 }
-
 /* Character Counter */
+
 .char-counter {
     text-align: right;
     font-size: 0.85rem;
@@ -1197,8 +1183,8 @@ footer {
     .char-counter.error {
         color: var(--secondary-color);
     }
-
 /* Radio Group */
+
 .radio-group {
     display: flex;
     gap: 20px;
@@ -1239,8 +1225,8 @@ footer {
         border-color: var(--primary-color);
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
     }
-
 /* Checkbox Group */
+
 .checkbox-group {
     margin-bottom: 20px;
 }
@@ -1293,8 +1279,8 @@ footer {
         opacity: 1;
     }
 }
-
 /* Responsive Modal */
+
 @media (max-width: 768px) {
     .modal-content {
         max-width: 95%;
