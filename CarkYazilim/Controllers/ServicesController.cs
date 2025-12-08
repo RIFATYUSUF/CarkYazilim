@@ -35,5 +35,17 @@ namespace CarkYazilim.Controllers
             _hizmetlerService.Add(hizmetler);
             return RedirectToAction("ServicesList");
         }
+        [HttpGet]
+        public IActionResult EditService(int id)
+        {
+            var value = _hizmetlerService.GetById(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult EditService(Hizmetler hizmetler)
+        {
+            _hizmetlerService.Update(hizmetler);
+            return RedirectToAction("ServicesList");
+        }
     }
 }

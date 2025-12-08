@@ -1,0 +1,61 @@
+﻿@using Entities.Concrete
+@model Hizmetler
+
+@{
+    ViewData["Title"] = "UpdateHizmetler";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="content-form">
+    <h2 style="color:var(--primary-color); margin-bottom:20px;">Hizmet Düzenle</h2>
+
+    <!-- Hata mesajı -->
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    <form method="post" action="@Url.Action("EditService", "Services")">
+
+
+        <input type="hidden" name="HizmetlerId" value="@Model.HizmetlerId" />
+
+        <div class="form-group">
+            <label>Başlık (Title)</label>
+            <input type="text" name="Title" class="form-control" value="@Model.Title" required />
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama (Description)</label>
+            <textarea name="Description" class="form-control" required>@Model.Description</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>İkon (FontAwesome sınıfı)</label>
+            <input type="text" name="Icon" class="form-control" value="@Model.Icon" />
+            <small>Örnek: <b>fa-gamepad</b>, <b>fa-code</b>, <b>fa-mobile</b></small>
+        </div>
+
+        <div class="form-group">
+            <label>Link (Detay Sayfası URL)</label>
+            <input type="text" name="Link" class="form-control" value="@Model.Link" />
+        </div>
+
+        <div class="form-group">
+            <label>Aktif mi?</label>
+            <select name="IsActive" class="form-control">
+                <option value="true" @@(Model.IsActive ? "selected=\"selected\"" : "")>Evet</option>
+                <option value="false" @@(!Model.IsActive ? "selected=\"selected\"" : "")>Hayır</option>
+            </select>
+        </div>
+
+        <button class="btn btn-success" type="submit">
+            <i class="fas fa-save"></i> Kaydet
+        </button>
+
+        <a href="/HizmetlerController1/HizmetlerList" class="btn btn-secondary">
+            Geri Dön
+        </a>
+
+    </form>
+</div>
