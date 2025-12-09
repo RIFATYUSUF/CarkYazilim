@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Panel – Çark Yazılım</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/ui/css/style.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: rgba(20,20,30,.95);
+            border-bottom: 1px solid rgba(0,255,255,.2);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .admin-header h1 {
+                font-family: Orbitron;
+                color: var(--primary-color);
+            }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(20,20,30,.8);
+            border: 1px solid rgba(0,255,255,.2);
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+            .card h3 {
+                color: var(--primary-color);
+            }
+
+        .log-item, .session-item, .ban-item, .deploy-item {
+            background: rgba(10,10,20,.5);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg,#00ffff,#ff0080);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.1);
+            color: #fff;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+            .modal.active {
+                display: flex;
+            }
+
+        .modal-content {
+            background: rgba(20,20,30,.95);
+            padding: 25px;
+            max-width: 600px;
+            width: 90%;
+            border-radius: 15px;
+            border: 1px solid rgba(0,255,255,.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="admin-header">
+        <h1><i class="fas fa-code"></i> Developer Paneli</h1>
+
+        <div class="admin-header-actions">
+            <a href="/Admin" class="btn btn-secondary">← Admin Paneli</a>
+            <a href="/Auth/Logout" class="btn btn-secondary"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+        </div>
+    </div>
+
+    <div class="admin-container">
+
+        <!-- Sistem Durum Kartları -->
+        <div class="grid">
+            <div class="card">
+                <h3>API Durumu</h3>
+                <p>🟢 Çalışıyor</p>
+            </div>
+            <div class="card">
+                <h3>Database</h3>
+                <p>🟢 Bağlı • 24ms</p>
+            </div>
+            <div class="card">
+                <h3>Mail Sunucusu</h3>
+                <p>🟡 Yavaş Yanıt</p>
+            </div>
+            <div class="card">
+                <h3>CPU Kullanımı</h3>
+                <p>%32</p>
+            </div>
+            <div class="card">
+                <h3>RAM Kullanımı</h3>
+                <p>%58</p>
+            </div>
+            <div class="card">
+                <h3>Disk</h3>
+                <p>%71 Dolu</p>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Hata Logları -->
+        <div class="card">
+            <h3><i class="fas fa-bug"></i> Hata Logları</h3>
+
+            <div class="log-item">
+                <strong>NullReferenceException</strong><br>
+                /api/user/update • 14:32
+                <button class="btn btn-primary btn-small">Detay</button>
+                <button class="btn btn-secondary btn-small">Sil</button>
+            </div>
+
+            <div class="log-item">
+                <strong>SQL Timeout</strong><br>
+                /api/order/get • 10:12
+                <button class="btn btn-primary btn-small">Detay</button>
+                <button class="btn btn-secondary btn-small">Sil</button>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- IP BAN SİSTEMİ -->
+        <div class="card">
+            <h3><i class="fas fa-shield-alt"></i> IP Ban Yönetimi</h3>
+
+            <input type="text" placeholder="IP adresi gir (örn: 185.22.14.7)">
+            <button class="btn btn-primary btn-small">Banla</button>
+
+            <div class="ban-item">
+                185.22.14.7 • <span style="opacity:.7">Spam  •  3 gün önce</span>
+                <button class="btn btn-secondary btn-small">Kaldır</button>
+            </div>
+
+            <div class="ban-item">
+                92.44.16.5 • <span style="opacity:.7">Brute-force</span>
+                <button class="btn btn-secondary btn-small">Kaldır</button>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Aktif Oturumlar -->
+        <div class="card">
+            <h3><i class="fas fa-users"></i> Aktif Oturumlar</h3>
+
+            <div class="session-item">
+                RifatAltun • Chrome • 193.55.22.177
+                <button class="btn btn-secondary btn-small">Sonlandır</button>
+            </div>
+
+            <div class="session-item">
+                TestUser • Mobile • 88.111.23.41
+                <button class="btn btn-secondary btn-small">Sonlandır</button>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Deploy Kayıtları -->
+        <div class="card">
+            <h3><i class="fas fa-cloud-upload-alt"></i> Deploy Kayıtları</h3>
+
+            <div class="deploy-item">
+                v1.4.2 • "Hizmetler bölümü güncellendi" • 12:21
+            </div>
+
+            <div class="deploy-item">
+                v1.4.1 • "Teklif formu bug fix" • 09:14
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content" id="modalBody"></div>
+    </div>
+
+</body>
+</html>

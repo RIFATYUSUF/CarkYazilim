@@ -15,5 +15,6 @@ namespace Entities.Concrete
         public string Telephone { get; set; }
         public string Description { get; set; }
         public DateTime SendDate { get; set; }
+        public bool KvkkOnay { get; set; }
     }
 }

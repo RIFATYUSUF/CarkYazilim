@@ -1,4 +1,5 @@
-﻿
+﻿@using Entities.Concrete
+@model List<QuotationForm>
 @{
     Layout = null;
 }
@@ -282,79 +283,33 @@
              3 TANE ÖRNEK TEKLİF ENTEGRE
              —————————————————————— -->
         <div class="teklif-list" id="teklifList">
+            @foreach (var item in Model)
+            {
+                <div class="teklif-item">
+                    <div class="teklif-header">
+                        <h3>@item.Name</h3>
+                        <div class="teklif-date"><i class="fas fa-clock"></i>@item.SendDate</div>
+                    </div>
 
+                    <div class="teklif-info">
+                        <div class="info-item"><i class="fas fa-envelope"></i> <span>@item.EMail</span></div>
+                        <div class="info-item"><i class="fas fa-phone"></i> <span>@item.Telephone</span></div>
+                    </div>
+
+                    <div class="teklif-message">
+                        <p>@item.Description</p>
+                    </div>
+
+                    <div class="teklif-actions">
+                        <a href="#" class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Detaylar</a>
+                        <a href="#" class="btn btn-danger btn-small"><i class="fas fa-trash"></i> Sil</a>
+                    </div>
+                </div>
+            }
             <!-- TEKLİF 1 -->
-            <div class="teklif-item">
-                <div class="teklif-header">
-                    <h3>Ahmet Yılmaz</h3>
-                    <div class="teklif-date"><i class="fas fa-clock"></i> 02 Şubat 2025 • 14:32</div>
-                </div>
-
-                <div class="teklif-info">
-                    <div class="info-item"><i class="fas fa-envelope"></i> <span>ahmet@example.com</span></div>
-                    <div class="info-item"><i class="fas fa-phone"></i> <span>0535 111 22 33</span></div>
-                </div>
-
-                <div class="teklif-message">
-                    <p>E-ticaret sitem için teklif almak istiyorum. Yaklaşık 150 ürün olacak.</p>
-                </div>
-
-                <div class="teklif-actions">
-                    <a href="#" class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Detaylar</a>
-                    <a href="#" class="btn btn-danger btn-small"><i class="fas fa-trash"></i> Sil</a>
-                </div>
-            </div>
+            
 
 
-            <!-- TEKLİF 2 -->
-            <div class="teklif-item">
-                <div class="teklif-header">
-                    <h3>Selin Aydın</h3>
-                    <div class="teklif-date"><i class="fas fa-clock"></i> 31 Ocak 2025 • 10:18</div>
-                </div>
-
-                <div class="teklif-info">
-                    <div class="info-item"><i class="fas fa-envelope"></i> <span>selin.aydin@gmail.com</span></div>
-                </div>
-
-                <div class="teklif-message">
-                    <p>Sosyal medya yönetimi için aylık fiyat bilgisi almak istiyorum.</p>
-                </div>
-
-                <div class="teklif-actions">
-                    <a href="#" class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Detaylar</a>
-                    <a href="#" class="btn btn-danger btn-small"><i class="fas fa-trash"></i> Sil</a>
-                </div>
-            </div>
-
-
-            <!-- TEKLİF 3 -->
-            <div class="teklif-item">
-                <div class="teklif-header">
-                    <h3>Burak Arslan</h3>
-                    <div class="teklif-date"><i class="fas fa-clock"></i> 29 Ocak 2025 • 17:45</div>
-                </div>
-
-                <div class="teklif-info">
-                    <div class="info-item"><i class="fas fa-envelope"></i> <span>burakarslan@example.com</span></div>
-                    <div class="info-item"><i class="fas fa-phone"></i> <span>0542 998 44 55</span></div>
-                </div>
-
-                <div class="teklif-message">
-                    <p>CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak.
-                        CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak
-                        CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak
-                        CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak
-                        CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak
-                        CRM otomasyon sistemi için teklif almak istiyorum. Toplam 12 çalışan kullanacak
-                    </p>
-                </div>
-
-                <div class="teklif-actions">
-                    <a href="#" class="btn btn-primary btn-small"><i class="fas fa-eye"></i> Detaylar</a>
-                    <a href="#" class="btn btn-danger btn-small"><i class="fas fa-trash"></i> Sil</a>
-                </div>
-            </div>
 
         </div>
 
