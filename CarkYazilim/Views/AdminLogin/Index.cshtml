@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi - Çark Yazılım</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/ui/css/style.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-container {
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .login-header h1 {
+                color: #00ffff;
+                font-family: 'Orbitron', sans-serif;
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            .login-header p {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                color: #fff;
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 12px 15px;
+                background: rgba(10, 10, 20, 0.8);
+                border: 1px solid rgba(0, 255, 255, 0.3);
+                border-radius: 10px;
+                color: #fff;
+            }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 12px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #00ffff, #ff0080);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1><i class="fas fa-shield-alt"></i> Admin Girişi</h1>
+            <p>Yönetim paneline erişmek için giriş yapın</p>
+        </div>
+
+        <!-- BACKEND POST FORM -->
+        <form method="post" asp-controller="AdminLogin" asp-action="Index">
+
+            @if (TempData["Error"] != null)
+            {
+                <div style="color:#ff4444; margin-bottom:15px; text-align:center;">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <div class="form-group">
+                <label for="username">Kullanıcı Adı</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+
+            <div class="form-group password-toggle">
+                <label for="password">Şifre</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Giriş Yap
+            </button>
+        </form>
+
+        <div class="back-link" style="margin-top:20px; text-align:center;">
+            <a href="/"><i class="fas fa-arrow-left"></i> Ana Sayfaya Dön</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

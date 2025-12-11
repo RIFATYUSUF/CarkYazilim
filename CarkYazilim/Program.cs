@@ -1,3 +1,4 @@
+using Business.Concrete;
 using Businiess.Abstract;
 using Businiess.Concrete;
 using DataAccess;
@@ -8,11 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddDbContext<MsSqlContext>();
 
-// *** DI Buraya gelecek ***
+// *** SESSION EKLE (ZORUNLU) ***
+builder.Services.AddSession();
 
+// *** DI Buraya gelecek ***
 builder.Services.AddScoped<IHeaderService, HeaderManager>();
 builder.Services.AddScoped<IHeaderDal, HeaderDal>();
 builder.Services.AddScoped<IServicesService, ServicesManager>();
@@ -25,11 +27,8 @@ builder.Services.AddScoped<IPortfolioService, PortfolioManager>();
 builder.Services.AddScoped<IPortfolioDal, PortfolioDal>();
 builder.Services.AddScoped<IQuotationFormService, QuotationFormManager>();
 builder.Services.AddScoped<IQuotationFormDal, QuotationFormDal>();
-
-
-
-
-
+builder.Services.AddScoped<IAdminService, AdminManager>();
+builder.Services.AddScoped<IAdminDal, AdminDal>();
 
 var app = builder.Build();
 
@@ -44,6 +43,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// *** SESSION MIDDLEWARE BURAYA GELECEK ***
+app.UseSession();
 
 app.UseAuthorization();
 
