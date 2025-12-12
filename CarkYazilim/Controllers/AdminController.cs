@@ -1,24 +1,22 @@
 ﻿using Businiess.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 
-public class AdminController : Controller
+namespace CarkYazilim.Controllers
 {
-    private readonly IQuotationFormService _quotationService;
-
-    public AdminController(IQuotationFormService quotationService)
+    // 🔒 Login zorunlu
+    public class AdminController : AdminBaseController
     {
-        _quotationService = quotationService;
-    }
+        private readonly IQuotationFormService _quotationService;
 
-    public IActionResult Index()
-    {
-        // Kullanıcı giriş yapmamışsa login sayfasına gönder
-        if (HttpContext.Session.GetString("AdminUser") == null)
-            return RedirectToAction("Index", "AdminLogin");
+        public AdminController(IQuotationFormService quotationService)
+        {
+            _quotationService = quotationService;
+        }
 
-        // Giriş yapılmışsa teklifleri çek
-        var list = _quotationService.GetAll();
-        return View(list);
+        public IActionResult Index()
+        {
+            var list = _quotationService.GetAll();
+            return View(list);
+        }
     }
 }

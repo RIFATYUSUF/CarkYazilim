@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class ServicesController : Controller
+    public class ServicesController : AdminBaseController
     {
         IHizmetlerService _hizmetlerService;
 

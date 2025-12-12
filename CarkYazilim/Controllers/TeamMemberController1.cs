@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class TeamMemberController1 : Controller
+    public class TeamMemberController1 : AdminBaseController
     {
         ITeamMemberService _teamMemberService;
 

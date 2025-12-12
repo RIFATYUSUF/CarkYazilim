@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CarkYazilim.Controllers
 {
-    public class HeaderController : Controller
+    public class HeaderController : AdminBaseController
     {
         private readonly IHeaderService _headerService;
 

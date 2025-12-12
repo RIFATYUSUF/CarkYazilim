@@ -1,8 +1,10 @@
 ﻿using Businiess.Abstract;
+using CarkYazilim.Controllers;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
-public class QuotationController : Controller
+public class QuotationController : AdminBaseController
+
 {
     private readonly IQuotationFormService _service;
 

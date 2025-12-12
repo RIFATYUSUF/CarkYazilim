@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class PortfolioController1 : Controller
+    public class PortfolioController1 : AdminBaseController
     {
         IPortfolioService _portfolioService;
 
