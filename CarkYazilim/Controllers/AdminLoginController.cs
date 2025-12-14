@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Businiess.Abstract;  // IAdminService
+﻿using Businiess.Abstract;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CarkYazilim.Controllers
 {
+    [AllowAnonymous] // 🔥 Login controller açık olacak
     public class AdminLoginController : Controller
     {
         private readonly IAdminService _adminService;
@@ -20,32 +24,31 @@ namespace CarkYazilim.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string username, string password)
+        public async Task<IActionResult> Index(string username, string password)
         {
             var admin = _adminService.ValidateLogin(username, password);
-
             if (admin == null)
             {
                 TempData["Error"] = "Kullanıcı adı veya şifre hatalı!";
                 return View();
             }
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, admin.UserName),
+                new Claim(ClaimTypes.Role, "Admin")
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties();
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-            // =============================
-            // 🎯 SESSION BAŞLAT
-            // =============================
-            HttpContext.Session.SetString("AdminUser", admin.UserName);
-            HttpContext.Session.SetInt32("AdminId", admin.AdminId);
-
-            // =============================
-            // 🎯 Admin Paneline Yönlendir
-            // =============================
             return RedirectToAction("Index", "Admin");
         }
 
-        public IActionResult Logout()
+        
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "AdminLogin");
         }
     }
 }

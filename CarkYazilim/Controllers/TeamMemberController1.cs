@@ -1,10 +1,12 @@
 ﻿using Businiess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class TeamMemberController1 : AdminBaseController
+    [Authorize]
+    public class TeamMemberController1 : Controller
     {
         ITeamMemberService _teamMemberService;
 

@@ -3,7 +3,7 @@ using CarkYazilim.Controllers;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
-public class QuotationController : AdminBaseController
+public class QuotationController : Controller
 
 {
     private readonly IQuotationFormService _service;

@@ -4,6 +4,8 @@ using Businiess.Concrete;
 using DataAccess;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MsSqlContext>();
 
-// *** SESSION EKLE (ZORUNLU) ***
-builder.Services.AddSession();
+// *** AUTOCAHAICON (ZORUNLU) ***
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=>
+    {
+        options.Cookie.Name="MyCookie";
+        options.LoginPath="/AdminLogin/Index";
+        options.AccessDeniedPath="/AdminLogin/Index";
+
+    });
 
 // *** DI Buraya gelecek ***
 builder.Services.AddScoped<IHeaderService, HeaderManager>();
@@ -45,7 +54,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 // *** SESSION MIDDLEWARE BURAYA GELECEK ***
-app.UseSession();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -1,10 +1,12 @@
 ﻿using Businiess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class ServicesController : AdminBaseController
+    [Authorize(Roles = "Admin")]
+    public class ServicesController : Controller
     {
         IHizmetlerService _hizmetlerService;
 

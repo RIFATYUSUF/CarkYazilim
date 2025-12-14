@@ -1,11 +1,13 @@
 ﻿using Businiess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace CarkYazilim.Controllers
 {
-    public class HeaderController : AdminBaseController
+    [Authorize(Roles = "Admin")]
+    public class HeaderController : Controller
     {
         private readonly IHeaderService _headerService;
 

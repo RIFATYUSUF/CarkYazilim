@@ -1,10 +1,11 @@
 ﻿using Businiess.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    // 🔒 Login zorunlu
-    public class AdminController : AdminBaseController
+    [Authorize]
+    public class AdminController : Controller
     {
         private readonly IQuotationFormService _quotationService;
 

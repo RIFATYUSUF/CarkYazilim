@@ -1,10 +1,12 @@
 ﻿using Businiess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarkYazilim.Controllers
 {
-    public class PortfolioController1 : AdminBaseController
+    [Authorize(Roles = "Admin")]
+    public class PortfolioController1 : Controller
     {
         IPortfolioService _portfolioService;
 
