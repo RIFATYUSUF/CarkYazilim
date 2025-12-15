@@ -38,6 +38,9 @@ builder.Services.AddScoped<IQuotationFormService, QuotationFormManager>();
 builder.Services.AddScoped<IQuotationFormDal, QuotationFormDal>();
 builder.Services.AddScoped<IAdminService, AdminManager>();
 builder.Services.AddScoped<IAdminDal, AdminDal>();
+builder.Services.AddScoped<IContactService, ContactManager>();
+builder.Services.AddScoped<IContactDal, ContactDal>();
+
 
 var app = builder.Build();
 

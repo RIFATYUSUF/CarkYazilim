@@ -1,21 +1,18 @@
 ﻿using Businiess.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarkYazilim.ViewComponents
+public class AdminMessagesViewComponent : ViewComponent
 {
-    public class _AboutComponentPartial : ViewComponent
+    private readonly IContactService _contactService;
+
+    public AdminMessagesViewComponent(IContactService contactService)
     {
-        IHeaderService _headerService;
+        _contactService = contactService;
+    }
 
-        public _AboutComponentPartial(IHeaderService headerService)
-        {
-            _headerService = headerService;
-        }
-
-        public IViewComponentResult Invoke()
-        {
-            var values = _headerService.GetAllHeaders();
-            return View(values);
-        }
+    public IViewComponentResult Invoke()
+    {
+        var messages = _contactService.GetAll();
+        return View(messages);
     }
 }
