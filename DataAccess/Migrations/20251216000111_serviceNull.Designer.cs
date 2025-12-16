@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MsSqlContext))]
-    partial class MsSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20251216000111_serviceNull")]
+    partial class serviceNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,16 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("SendDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Service")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ServicesId")
+                        .HasColumnType("int");
+
                     b.HasKey("ContactId");
+
+                    b.HasIndex("ServicesId");
 
                     b.ToTable("Contacts");
                 });
@@ -290,6 +302,15 @@ namespace DataAccess.Migrations
                     b.HasKey("TeamMemberId");
 
                     b.ToTable("TeamMembers");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Contact", b =>
+                {
+                    b.HasOne("Entities.Concrete.Services", "Servies")
+                        .WithMany()
+                        .HasForeignKey("ServicesId");
+
+                    b.Navigation("Servies");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,10 +12,10 @@ namespace Entities.Concrete
         public int ContactId { get; set; }
         public string NameSurname { get; set; }
         public string EMail { get; set; }
-        public string Service { get; set; }
+        //public string Service { get; set; }
         public string Message { get; set; }
         public DateTime SendDate { get; set; }
-        public int ServicesId { get; set; }
-        public Services Servies { get; set; }
+        //public int? ServicesId { get; set; }
+        //public Services? Servies { get; set; }
     }
 }
