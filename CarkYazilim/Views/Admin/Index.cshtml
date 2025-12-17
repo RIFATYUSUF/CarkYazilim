@@ -357,7 +357,7 @@
 
         </div>
 
-        <!-- FİLTRELER (AYNI) -->
+        <!-- FİLTRELER-->
         <div class="filters">
             <input type="text" id="searchInput" placeholder="Ad, e-posta veya telefon ile ara...">
             <select id="sortSelect">
@@ -395,7 +395,9 @@
                     </div>
 
                     <div class="teklif-actions">
-                        <a href="#" class="btn btn-danger btn-small">
+                        <a href="/Admin/Delete/@item.QuotationFormId"
+                           class="btn btn-danger btn-small"
+                           onclick="return confirm('Bu teklifi silmek istediğine emin misin?')">
                             <i class="fas fa-trash"></i> Sil
                         </a>
                     </div>

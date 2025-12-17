@@ -2,22 +2,49 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarkYazilim.Controllers
+[Authorize]
+public class AdminController : Controller
 {
-    [Authorize]
-    public class AdminController : Controller
+    private readonly IQuotationFormService _quotationService;
+    private readonly IContactService _contactService;
+
+    public AdminController(
+            IQuotationFormService quotationService,
+            IContactService contactService)
     {
-        private readonly IQuotationFormService _quotationService;
+        _quotationService = quotationService;
+        _contactService = contactService;
+    }
 
-        public AdminController(IQuotationFormService quotationService)
+    public IActionResult Index()
+    {
+        var list = _quotationService.GetAll();
+        return View(list);
+    }
+
+    // SİLME ACTION
+    public IActionResult Delete(int id)
+    {
+        var value = _quotationService.GetById(id);
+        if (value != null)
         {
-            _quotationService = quotationService;
+            _quotationService.Delete(value);
         }
 
-        public IActionResult Index()
+        return RedirectToAction("Index");
+    }
+    
+    //  MESAJ  SİLME
+    
+    [HttpGet]
+    public IActionResult DeleteContact(int id)
+    {
+        var message = _contactService.GetById(id);
+        if (message != null)
         {
-            var list = _quotationService.GetAll();
-            return View(list);
+            _contactService.ContactDelete(message);
         }
+
+        return RedirectToAction("Index");
     }
 }

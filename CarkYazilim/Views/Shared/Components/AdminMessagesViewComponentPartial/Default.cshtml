@@ -23,8 +23,10 @@
                 <p>@msg.Message</p>
             </div>
 
-            <div class="teklif-actions">
-                <a href="#" class="btn btn-danger btn-small">
+            <div class="message-actions">
+                <a href="/Admin/DeleteContact/@msg.ContactId"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Bu mesajı silmek istiyor musun?')">
                     <i class="fas fa-trash"></i> Sil
                 </a>
             </div>
